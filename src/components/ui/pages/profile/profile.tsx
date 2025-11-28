@@ -1,11 +1,10 @@
 import { FC } from 'react';
-
 import { Button, Input } from '@zlden/react-developer-burger-ui-components';
-import styles from './profile.module.css';
-import commonStyles from '../common.module.css';
-
 import { ProfileUIProps } from './type';
 import { ProfileMenu } from '@components';
+
+import commonStyles from '../common.module.css';
+import styles from './profile.module.css';
 
 export const ProfileUI: FC<ProfileUIProps> = ({
   formValue,
@@ -19,6 +18,7 @@ export const ProfileUI: FC<ProfileUIProps> = ({
     <div className={`mt-30 mr-15 ${styles.menu}`}>
       <ProfileMenu />
     </div>
+
     <form
       className={`mt-30 ${styles.form} ${commonStyles.form}`}
       onSubmit={handleSubmit}
@@ -37,6 +37,7 @@ export const ProfileUI: FC<ProfileUIProps> = ({
             icon={'EditIcon'}
           />
         </div>
+
         <div className='pb-6'>
           <Input
             type={'email'}
@@ -50,6 +51,7 @@ export const ProfileUI: FC<ProfileUIProps> = ({
             icon={'EditIcon'}
           />
         </div>
+
         <div className='pb-6'>
           <Input
             type={'password'}
@@ -63,6 +65,7 @@ export const ProfileUI: FC<ProfileUIProps> = ({
             icon={'EditIcon'}
           />
         </div>
+
         {isFormChanged && (
           <div className={styles.button}>
             <Button
@@ -78,6 +81,7 @@ export const ProfileUI: FC<ProfileUIProps> = ({
             </Button>
           </div>
         )}
+
         {updateUserError && (
           <p
             className={`${commonStyles.error} pt-5 text text_type_main-default`}

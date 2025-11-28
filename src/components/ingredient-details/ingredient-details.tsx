@@ -1,14 +1,28 @@
 import { FC } from 'react';
-import { Preloader } from '../ui/preloader';
-import { IngredientDetailsUI } from '../ui/ingredient-details';
+import { useParams } from 'react-router-dom';
+import { useSelector } from '../../services/store';
+import { IngredientDetailsUI } from '@ui';
+import { TIngredient } from '@utils-types';
+
+type RouteParams = {
+  id?: string;
+};
 
 export const IngredientDetails: FC = () => {
-  /** TODO: взять переменную из стора */
-  const ingredientData = null;
+  const { id } = useParams<RouteParams>();
 
-  if (!ingredientData) {
-    return <Preloader />;
-  }
+  const ingredient = useSelector((state) => {
+    const slice: any = (state as any).ingredients;
 
-  return <IngredientDetailsUI ingredientData={ingredientData} />;
+    const list: TIngredient[] =
+      slice?.data || slice?.items || slice?.ingredients || [];
+
+    if (!id) return null;
+
+    return list.find((item) => item._id === id) ?? null;
+  });
+
+  return <IngredientDetailsUI ingredientData={ingredient} />;
 };
+
+export default IngredientDetails;

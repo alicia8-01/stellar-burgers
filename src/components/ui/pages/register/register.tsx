@@ -1,12 +1,13 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import {
   Input,
   Button,
   PasswordInput
 } from '@zlden/react-developer-burger-ui-components';
-import styles from '../common.module.css';
 import { Link } from 'react-router-dom';
 import { RegisterUIProps } from './type';
+
+import styles from '../common.module.css';
 
 export const RegisterUI: FC<RegisterUIProps> = ({
   errorText,
@@ -21,6 +22,7 @@ export const RegisterUI: FC<RegisterUIProps> = ({
   <main className={styles.container}>
     <div className={`pt-6 ${styles.wrapCenter}`}>
       <h3 className='pb-6 text text_type_main-medium'>Регистрация</h3>
+
       <form
         className={`pb-15 ${styles.form}`}
         name='register'
@@ -39,6 +41,7 @@ export const RegisterUI: FC<RegisterUIProps> = ({
               size='default'
             />
           </div>
+
           <div className='pb-6'>
             <Input
               type='email'
@@ -51,6 +54,7 @@ export const RegisterUI: FC<RegisterUIProps> = ({
               size={'default'}
             />
           </div>
+
           <div className='pb-6'>
             <PasswordInput
               onChange={(e) => setPassword(e.target.value)}
@@ -58,11 +62,13 @@ export const RegisterUI: FC<RegisterUIProps> = ({
               name='password'
             />
           </div>
+
           <div className={`pb-6 ${styles.button}`}>
             <Button type='primary' size='medium' htmlType='submit'>
               Зарегистрироваться
             </Button>
           </div>
+
           {errorText && (
             <p className={`${styles.error} text text_type_main-default pb-6`}>
               {errorText}
