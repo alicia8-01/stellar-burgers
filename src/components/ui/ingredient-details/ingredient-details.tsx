@@ -7,7 +7,7 @@ export const IngredientDetailsUI: FC<IngredientDetailsUIProps> = ({
   ingredientData
 }) => {
   const location = useLocation();
-  const isModal = Boolean((location.state as any)?.background);
+  const isModal = Boolean(location.state?.background);
   const showTitleInBody = !isModal;
 
   if (!ingredientData) {

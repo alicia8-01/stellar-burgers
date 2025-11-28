@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from '../../services/store';
 import { createOrder, clearOrder } from '../../services/slices/orderSlice';
@@ -14,7 +14,14 @@ export const BurgerConstructor: FC = () => {
   const { currentOrder: order, loading: orderRequest } = useSelector(
     (state) => state.order
   );
+
   const { user } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (order) {
+      dispatch(clearConstructor());
+    }
+  }, [order, dispatch]);
 
   const onOrderClick = () => {
     if (!constructorItems?.bun || orderRequest) return;
@@ -37,7 +44,6 @@ export const BurgerConstructor: FC = () => {
 
   const closeOrderModal = () => {
     dispatch(clearOrder());
-    dispatch(clearConstructor());
   };
 
   const price = useMemo(

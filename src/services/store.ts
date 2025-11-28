@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, Middleware } from '@reduxjs/toolkit';
 import { rootReducer } from './rootReducer';
 import {
   TypedUseSelectorHook,
@@ -13,15 +13,17 @@ const WS_BASE_URL = process.env.BURGER_API_URL
 
 let socket: WebSocket | null = null;
 
-const socketMiddleware = (store: any) => (next: any) => (action: any) => {
-  if (action.type === 'feed/startFeed') {
+const socketMiddleware: Middleware = (store) => (next) => (action) => {
+  const actionType = (action as { type: string }).type;
+
+  if (actionType === 'feed/startFeed') {
     if (socket) socket.close();
     socket = new WebSocket(`${WS_BASE_URL}/all`);
     socket.onmessage = (event: MessageEvent) => {
       const data = JSON.parse(event.data);
       store.dispatch({ type: 'feed/setFeedData', payload: data });
     };
-  } else if (action.type === 'order/startUserFeed') {
+  } else if (actionType === 'order/startUserFeed') {
     if (socket) socket.close();
     const token = getCookie('accessToken');
     const accessToken = token ? token.replace('Bearer ', '') : '';
@@ -31,8 +33,8 @@ const socketMiddleware = (store: any) => (next: any) => (action: any) => {
       store.dispatch({ type: 'order/setUserOrders', payload: data });
     };
   } else if (
-    action.type === 'feed/stopFeed' ||
-    action.type === 'order/stopUserFeed'
+    actionType === 'feed/stopFeed' ||
+    actionType === 'order/stopUserFeed'
   ) {
     if (socket) {
       socket.close();

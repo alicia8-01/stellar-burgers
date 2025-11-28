@@ -12,10 +12,8 @@ export const IngredientDetails: FC = () => {
   const { id } = useParams<RouteParams>();
 
   const ingredient = useSelector((state) => {
-    const slice: any = (state as any).ingredients;
-
-    const list: TIngredient[] =
-      slice?.data || slice?.items || slice?.ingredients || [];
+    const ingredientsState = state.ingredients;
+    const list: TIngredient[] = ingredientsState.items;
 
     if (!id) return null;
 
