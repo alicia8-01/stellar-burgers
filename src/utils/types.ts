@@ -38,3 +38,28 @@ export type TUser = {
 };
 
 export type TTabMode = 'bun' | 'sauce' | 'main';
+
+export type TLoginData = {
+  email: string;
+  password: string;
+};
+
+export type TRegisterData = {
+  email: string;
+  name: string;
+  password: string;
+};
+
+export type TOrderState = {
+  currentOrder: TOrder | null;
+  userOrders: TOrder[];
+  loading: boolean;
+  error: string | undefined;
+};
+
+export type TUserState = {
+  user: TUser | null;
+  isAuth: boolean;
+  loading: boolean;
+  error: string | undefined;
+};
