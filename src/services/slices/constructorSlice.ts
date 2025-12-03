@@ -31,6 +31,17 @@ const constructorSlice = createSlice({
       action: PayloadAction<{ from: number; to: number }>
     ) => {
       const { from, to } = action.payload;
+
+      if (
+        from < 0 ||
+        to < 0 ||
+        from >= state.ingredients.length ||
+        to >= state.ingredients.length ||
+        from === to
+      ) {
+        return state;
+      }
+
       const ingredients = [...state.ingredients];
       const [movedItem] = ingredients.splice(from, 1);
       ingredients.splice(to, 0, movedItem);
