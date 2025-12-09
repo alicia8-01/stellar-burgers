@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "target": "ES6",
+      "lib": ["ES6", "DOM"],
+      "jsx": "react-jsx",
+      "types": ["cypress"],
+      "esModuleInterop": true,
+      "allowJs": true,
+      "skipLibCheck": true
+    },
+    "include": ["**/*.ts", "**/*.tsx"]
+  }
+  
